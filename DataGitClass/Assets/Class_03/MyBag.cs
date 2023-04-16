@@ -7,7 +7,7 @@ public class MyItem         //내 아이템 타입 설정
     public int itemType;
 
 }
-public class MyNode<T> where T : class
+public class MyNode<T> where T : class //where T는 제약조건,Class가 붙는다면 T는 레퍼런스 타입,Struct는 벨류타입
 {
     public MyItem myItem;
     public MyNode<T> nextNode;

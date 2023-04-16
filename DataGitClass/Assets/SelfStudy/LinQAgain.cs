@@ -34,7 +34,7 @@ public class LinQAgain : MonoBehaviour
         structure.Add(Yoon);
         structure.Add(seoYoung);
         structure.Add(Gyum);
-        structure = structure.OrderBy(x => x.age).ToList();     //나이순으로 정렬
+        structure = structure.OrderBy(x => x.age).ToList();     //나이순으로 정렬 리스트.오더바이.투 리스트 순인듯
         for(byte i = 0;structure.Count > i; i++)
         {
             Tester(structure[i]);
