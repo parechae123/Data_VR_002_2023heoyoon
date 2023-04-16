@@ -11,7 +11,7 @@ public class Stack : MonoBehaviour
     public float delay = 0;
     public float time = 0;
     public float moveSpeed = 10;
-    public List<Vector3> revPos = new List<Vector3>(10);
+    [SerializeField]public List<Vector3> revPos = new List<Vector3>(10);
     void Start()
     {
         
