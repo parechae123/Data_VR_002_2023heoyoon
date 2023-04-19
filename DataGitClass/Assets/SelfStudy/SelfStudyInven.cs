@@ -15,6 +15,7 @@ public class invenDict
     public Image invenIcons;
     public Text amountOutput;
     public byte slotAmount;
+    public bool isFull;
 }
 public class SelfStudyInven : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class SelfStudyInven : MonoBehaviour
     {
         for (byte i =0; transform.childCount>i;i++)
         {
-            invenDict.Add(i, new invenDict {invenIcons = transform.GetChild(i).GetComponent<Image>(), amountOutput=transform.GetChild(i).GetChild(0).GetComponent<Text>() });
+            invenDict.Add(i, new invenDict {invenIcons = transform.GetChild(i).GetComponent<Image>(), amountOutput=transform.GetChild(i).GetChild(0).GetComponent<Text>(),isFull = false });
         }
     }
 
@@ -56,38 +57,65 @@ public class SelfStudyInven : MonoBehaviour
     }
     public void GetItem(int infoIndex, byte addAmount)
     {
-        for(byte i = 0; invenDict.Count > i; i++)
+        for (byte i = 0; invenDict.Count > i; i++)
         {
-            int remainValues = invenDict[i].slotAmount+addAmount% itemStackMax;
-            if (invenDict[i].invenIcons.sprite == Resources.Load<Sprite>(selfStudyItemDictionary[infoIndex].itemImagePath) && ((int)invenDict[i].slotAmount+addAmount < itemStackMax))
+            /*            int remainValues = invenDict[i].slotAmount+addAmount% itemStackMax;
+                        if (invenDict[i].invenIcons.sprite == Resources.Load<Sprite>(selfStudyItemDictionary[infoIndex].itemImagePath) && ((int)invenDict[i].slotAmount+addAmount < itemStackMax))
+                        {
+                            selfStudyItemDictionary[infoIndex].amount += addAmount;//인벤 내 아이템의 갯수
+                            invenDict[i].slotAmount += addAmount;                //슬롯 내 아이템의 갯수
+                            Debug.Log("중첩");
+                            invenDict[i].amountOutput.text = invenDict[i].slotAmount.ToString();
+                            break;
+                        }
+                        if (invenDict[i].invenIcons.sprite == Resources.Load<Sprite>(selfStudyItemDictionary[infoIndex].itemImagePath) && ((int)invenDict[i].slotAmount + addAmount) > itemStackMax)//여기가 다음 실행때 실행 안되도록 해야됨
+                        {
+                            invenDict[i].slotAmount = itemStackMax;
+                            invenDict[i].amountOutput.text = itemStackMax.ToString();
+                            Debug.Log((remainValues));
+                            for (byte f = 0; f < invenDict.Count; f++)
+                            {
+                                if (invenDict[f].slotAmount + remainValues > itemStackMax)
+                                {
+                                    if(invenDict[f].invenIcons.sprite == null)
+                                    {
+                                        Debug.Log("나누기");
+                                        invenDict[f].invenIcons.sprite = Resources.Load<Sprite>(selfStudyItemDictionary[infoIndex].itemImagePath);
+                                        invenDict[f].slotAmount += (byte)remainValues;
+                                        invenDict[f].amountOutput.text = invenDict[f].slotAmount.ToString();
+                                        break;
+                                    }
+                                }
+                            }
+                            break;
+                        }*/
+            if (invenDict[i].slotAmount+addAmount <= itemStackMax && invenDict[i].invenIcons.sprite == Resources.Load<Sprite>(selfStudyItemDictionary[infoIndex].itemImagePath))
             {
                 selfStudyItemDictionary[infoIndex].amount += addAmount;//인벤 내 아이템의 갯수
                 invenDict[i].slotAmount += addAmount;                //슬롯 내 아이템의 갯수
-                Debug.Log("중첩");
                 invenDict[i].amountOutput.text = invenDict[i].slotAmount.ToString();
                 break;
             }
-            if (invenDict[i].invenIcons.sprite == Resources.Load<Sprite>(selfStudyItemDictionary[infoIndex].itemImagePath) && ((int)invenDict[i].slotAmount + addAmount) > itemStackMax)//여기가 다음 실행때 실행 안되도록 해야됨
+            if (invenDict[i].slotAmount + addAmount >= itemStackMax && invenDict[i].isFull == false)
             {
-                invenDict[i].slotAmount = itemStackMax;
-                invenDict[i].amountOutput.text = itemStackMax.ToString();
-                for (byte f = 0; f < invenDict.Count; f++)
+                invenDict[i].isFull = true;
+                int remainAmount = (invenDict[i].slotAmount + addAmount)%255;
+                selfStudyItemDictionary[infoIndex].amount += addAmount;//인벤 내 아이템의 갯수
+                invenDict[i].slotAmount = 255;                //슬롯 내 아이템의 갯수
+                invenDict[i].amountOutput.text = invenDict[i].slotAmount.ToString();
+                for (byte j = 0; invenDict.Count>j;j++)
                 {
-                    if (invenDict[f].slotAmount + remainValues > itemStackMax)
+                    if (invenDict[j].isFull == false&& invenDict[j].invenIcons.sprite == null)
                     {
-                        if(invenDict[f].invenIcons.sprite == null)
-                        {
-                            Debug.Log("나누기");
-                            invenDict[f].slotAmount += (byte)remainValues;
-                            invenDict[f].amountOutput.text = invenDict[f].slotAmount.ToString();
-                            invenDict[f].invenIcons.sprite = Resources.Load<Sprite>(selfStudyItemDictionary[infoIndex].itemImagePath);
-                            break;
-                        }
+                        invenDict[j].slotAmount += (byte)remainAmount;                //슬롯 내 아이템의 갯수
+                        invenDict[j].invenIcons.sprite = Resources.Load<Sprite>(selfStudyItemDictionary[infoIndex].itemImagePath);
+                        invenDict[j].amountOutput.text = invenDict[j].slotAmount.ToString();
+                        break;
                     }
                 }
                 break;
             }
-            if (invenDict[i].invenIcons.sprite ==null)
+            if (invenDict[i].invenIcons.sprite ==null&& !invenDict[i].isFull)
             {
                 invenDict[i].slotAmount += addAmount;                       //슬롯 내 아이템의 갯수
                 selfStudyItemDictionary[infoIndex].amount += addAmount;     //인벤 내 아이템의 갯수
