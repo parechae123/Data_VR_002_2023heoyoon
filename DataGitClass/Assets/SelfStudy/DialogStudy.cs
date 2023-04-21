@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,12 +24,16 @@ public class DialogStudy : MonoBehaviour
     }
     IEnumerator DialogOutput(int a)
     {
+        int indx = dialogInfoIndex[a].script.Length;
         charactorName.text = dialogInfoIndex[a].charactorName;
-        for (int i = 0; i < dialogInfoIndex[a].script.Length; i++)
+        for (int i = 0; i <= dialogInfoIndex[a].script.Length; i++)
         {
             yield return new WaitForSeconds(0.1f);
-            int indx = dialogInfoIndex[a].script.Length;
-            charactorScript.text = dialogInfoIndex[a].script.Substring(i);
+/*            charactorScript.text = dialogInfoIndex[a].script.Substring(indx-(i+1));
+            Debug.Log(indx - i);*/
+            charactorScript.text = dialogInfoIndex[a].script.Substring(0,i);
+            Debug.Log(i);
+
             //괄호 안에 있는 
         }
 
