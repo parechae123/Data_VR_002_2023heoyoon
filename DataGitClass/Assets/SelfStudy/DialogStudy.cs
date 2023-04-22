@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,11 +10,36 @@ public class DialogStudy : MonoBehaviour
    [SerializeField]private Dialogthings[] dialogInfoIndex;
     public Text charactorName;
     public Text charactorScript;
+    public int diaStackIndex = 0;
+    public bool isCoroutineEnd;
     // Start is called before the first frame update
-
-    private void Start()
+    private void Update()
     {
-        StartCoroutine(DialogOutput(0));
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (charactorScript.gameObject.activeSelf == true)
+            {
+                if (diaStackIndex < dialogInfoIndex.Length)
+                {
+                    if (isCoroutineEnd)
+                    {
+                        StartCoroutine(DialogOutput(diaStackIndex));
+                    }
+                    else
+                    {
+                        Debug.Log("타이핑 캔슬");
+                        StopCoroutine("DialogOutput");
+                        isCoroutineEnd = true;
+                    }
+                }
+                else
+                {
+                    charactorName.gameObject.SetActive(false);
+                    charactorScript.gameObject.SetActive(false);
+                }
+            }
+
+        }
     }
     [System.Serializable]
     public struct Dialogthings
@@ -24,18 +50,25 @@ public class DialogStudy : MonoBehaviour
     }
     IEnumerator DialogOutput(int a)
     {
+        yield return new WaitUntil(() => isCoroutineEnd == true);
+        diaStackIndex++;
         int indx = dialogInfoIndex[a].script.Length;
         charactorName.text = dialogInfoIndex[a].charactorName;
-        for (int i = 0; i <= dialogInfoIndex[a].script.Length; i++)
+        Debug.Log(dialogInfoIndex.Length);
+        if (a < dialogInfoIndex.Length)
         {
-            yield return new WaitForSeconds(0.1f);
-/*            charactorScript.text = dialogInfoIndex[a].script.Substring(indx-(i+1));
-            Debug.Log(indx - i);*/
-            charactorScript.text = dialogInfoIndex[a].script.Substring(0,i);
-            Debug.Log(i);
-
-            //괄호 안에 있는 
+            isCoroutineEnd = false;
+            for (int i = 0; i <= dialogInfoIndex[a].script.Length; i++)
+            {
+                charactorScript.text = dialogInfoIndex[a].script.Substring(0, i);
+                yield return new WaitForSeconds(0.1f);
+                if(isCoroutineEnd == true)
+                {
+                    charactorScript.text = dialogInfoIndex[diaStackIndex-1].script;
+                    break;
+                }
+            }
+            isCoroutineEnd = true;
         }
-
     }
 }
