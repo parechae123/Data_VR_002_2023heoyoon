@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/SelfStudy/SingleToneTest/SingletoneTestScene.unity
+    guid: b0f0803bd0cdc63489930eeba3f28ebb
+  - enabled: 1
+    path: Assets/Scenes/DialogTest.unity
+    guid: e3f13af9d80ff5b4eb49e3c915774cf2
   m_configObjects: {}
