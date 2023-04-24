@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/SelfStudy/SingleToneTest/SingletoneTestScene.unity
+    path: Assets/SelfStudy/DesignPatternStudy/SingleToneTest/SingletoneTestScene.unity
     guid: b0f0803bd0cdc63489930eeba3f28ebb
   - enabled: 1
     path: Assets/Scenes/DialogTest.unity
