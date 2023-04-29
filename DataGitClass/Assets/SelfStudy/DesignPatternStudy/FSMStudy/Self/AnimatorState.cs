@@ -16,11 +16,17 @@ public class PlayerAnimTree: MonoBehaviour
     protected Rigidbody rb;
     AnimatorState<string> state = new AnimatorState<string>();
     protected Animator anim;
+    protected int atkCount = 0;
     protected virtual void stateUpdate(PlrStates newState)
     {
-        StopCoroutine(plrStates.ToString());
-        plrStates = newState;
-        StartCoroutine(plrStates.ToString());
+        if (isAttackAnimOver())
+        {
+            StopCoroutine(plrStates.ToString());
+            anim.SetBool(plrStates.ToString(), false);
+            plrStates = newState;
+            StartCoroutine(plrStates.ToString());
+        }
+
     }
     public bool isAttackAnimOver()
     {
@@ -35,7 +41,7 @@ public class PlayerAnimTree: MonoBehaviour
     }
     IEnumerator Idle()
     {
-        anim.SetTrigger(plrStates.ToString());
+        anim.SetBool(plrStates.ToString(), true);
         while (true)
         {
             Debug.Log("플레이어 대기");
@@ -44,9 +50,9 @@ public class PlayerAnimTree: MonoBehaviour
     }
     IEnumerator Run()
     {
+        anim.SetBool(plrStates.ToString(), true);
         while (true)
         {
-            anim.SetTrigger(plrStates.ToString());
             Debug.Log("플레이어 런");
             yield return null;
         }
@@ -55,29 +61,29 @@ public class PlayerAnimTree: MonoBehaviour
     {
         Debug.Log("플레이어 어택");
         yield return new WaitForEndOfFrame();
-        anim.SetTrigger(plrStates.ToString());
-        isAttackAnimOver();
+        Debug.Log(plrStates);
+        ++atkCount;
+        anim.SetInteger("AttackStats", atkCount);
+        anim.SetBool(plrStates.ToString(), true);
         yield return new WaitForEndOfFrame();
-        float animTime = anim.GetCurrentAnimatorStateInfo(0).length;//이렇게 하면 해당 애니메이션 시간이 나옴
-        Debug.Log(animTime);
-        while(!isAttackAnimOver())
+        /*float animTime = anim.GetCurrentAnimatorStateInfo(0).length;//이렇게 하면 해당 애니메이션 시간이 나옴*/
+        while (!isAttackAnimOver())
         {
             yield return new WaitForEndOfFrame();
-            /*if (Input.GetKeyDown(KeyCode.S))
+            if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8f)
             {
-                Debug.Log("2타");
-                break;
-            }*/
-            Debug.Log(animTime);
+                anim.SetInteger("AttackStats", atkCount);
+            }
         }
-        Debug.Log("애님 끝");
-/*        stateUpdate(PlrStates.Idle);*/
+        Debug.Log("아님 끝");
+        atkCount = 0;
+        stateUpdate(PlrStates.Idle);
     }
     IEnumerator Garding()
     {
+        anim.SetBool(plrStates.ToString(), true);
         while (true)
         {
-            anim.SetTrigger(plrStates.ToString());
             Debug.Log("플레이어 막기");
             yield return null;
         }

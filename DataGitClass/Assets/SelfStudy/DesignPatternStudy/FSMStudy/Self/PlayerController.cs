@@ -13,7 +13,17 @@ public class PlayerController : PlayerAnimTree
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.A)) stateUpdate(PlrStates.Idle);
-        if (Input.GetKeyDown(KeyCode.S)) stateUpdate(PlrStates.Attack);
+        if (Input.GetKeyDown(KeyCode.S)) 
+        {
+            if (atkCount>0)
+            {
+                atkCount++;
+            }
+            else
+            {
+                stateUpdate(PlrStates.Attack);
+            }
+        } 
         if (Input.GetKeyDown(KeyCode.D)) stateUpdate(PlrStates.Run);
         if (Input.GetKeyDown(KeyCode.F)) stateUpdate(PlrStates.Garding);
     }
