@@ -17,7 +17,7 @@ public class PlayerController : PlayerAnimTree
         {
             if (atkCount>0)
             {
-                atkCount++;
+                atkCount = anim.GetInteger("AttackStats") + 1;
             }
             else
             {
