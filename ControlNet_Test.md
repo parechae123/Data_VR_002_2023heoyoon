@@ -24,3 +24,6 @@ Negative Prompt:
 ---
 Steps: 20, Sampler: Euler a, CFG scale: 7, Seed: 2818195469, Size: 512x512, Model hash: 6ce0161689, Model: v1-5-pruned-emaonly, ControlNet Enabled: True, ControlNet Preprocessor: lineart_anime, ControlNet Model: control_v11p_sd15_scribble [d4ba51ff], ControlNet Weight: 1, ControlNet Starting Step: 0, ControlNet Ending Step: 1, ControlNet Resize Mode: Resize and Fill, ControlNet Pixel Perfect: False, ControlNet Control Mode: Balanced, ControlNet Preprocessor Parameters: "(512, 64, 64)"
 ---
+# Suffle (ControlNet 1.1)
+<!-- Image -->
+![image]()
