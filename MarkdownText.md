@@ -37,7 +37,7 @@
 Click [My Git hub](https://github.com/parechae123)
 
 <!-- Image -->
-![image](https://github.com/parechae123/Data_VR_002_2023heoyoon/blob/main/StableDiffusion/00009-1771760260.png?raw=true)
+![image](https://github.com/parechae123/Data_VR_002_2023heoyoon/blob/main/StableDiffusion/00022-89630212.png?raw=true)
 
 <!-- Table -->
 |Header|Description|other|
@@ -60,6 +60,6 @@ Debug.Log(Message);
 ```
 
 <!-- Git TodoList -->
--[x] #555
--[x] #556
--[x] #557
+- [x] #555
+- [x] #556
+- [x] #557
