@@ -26,4 +26,12 @@ Steps: 20, Sampler: Euler a, CFG scale: 7, Seed: 2818195469, Size: 512x512, Mode
 ---
 # Suffle (ControlNet 1.1)
 <!-- Image -->
-![image]()
+![image](https://github.com/parechae123/Data_VR_002_2023heoyoon/blob/main/StableDiffusion/00036-2818195469.png?raw=true)
+
+
+# ip (ControlNet 1.1)
+<!-- Image -->
+![image](https://github.com/parechae123/Data_VR_002_2023heoyoon/blob/main/StableDiffusion/00054-956374247.png?raw=true)
+# Pix2Pix (ControlNet 1.1)
+<!-- Image -->
+![image](https://github.com/parechae123/Data_VR_002_2023heoyoon/blob/main/StableDiffusion/Pix2Pix.png?raw=true)
