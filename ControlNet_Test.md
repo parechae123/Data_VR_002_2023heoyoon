@@ -35,3 +35,7 @@ Steps: 20, Sampler: Euler a, CFG scale: 7, Seed: 2818195469, Size: 512x512, Mode
 # Pix2Pix (ControlNet 1.1)
 <!-- Image -->
 ![image](https://github.com/parechae123/Data_VR_002_2023heoyoon/blob/main/StableDiffusion/Pix2Pix.png?raw=true)
+
+# Open Pose(controlNet 1.1)
+![image](https://github.com/parechae123/Data_VR_002_2023heoyoon/blob/main/StableDiffusion/00021-218060439.png?raw=true)
+![image](https://github.com/parechae123/Data_VR_002_2023heoyoon/blob/main/StableDiffusion/tmppp58hlt5.png?raw=true)
