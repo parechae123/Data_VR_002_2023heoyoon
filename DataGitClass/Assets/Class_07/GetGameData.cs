@@ -6,17 +6,22 @@ public class GetGameData : MonoBehaviour
 {
     public Entity_GameDB entity_GameDB;
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
-        foreach(Entity_GameDB.Param param in entity_GameDB.sheets[0].list)
-        {
-            Debug.Log(param.index + "-" + param.objectid + "-" + param.text);
-        }
+        DebugPrint();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void DebugPrint()
+    {
+        foreach (Entity_GameDB.Param param in entity_GameDB.sheets[0].list)
+        {
+            Debug.Log(param.index + "-" + param.objectid + "-" + param.text);
+        }
     }
 }
